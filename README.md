@@ -128,7 +128,7 @@ mpc_controller(s,s_target,z_star,Np,Q,R_weight,W_weight,Ts,K,F,q_current,image_w
 
 ```
 % Use fuzzy controller for velocity adjustment
-adjusted_velocity = fuzzy_velocity_controller_V3(error, error_rate);
+[max_acc, max_jerk, fis] = fuzzy_velocity_controller_V3(e, de, a_rated)
 ```
 
 ## Testing and Validation
