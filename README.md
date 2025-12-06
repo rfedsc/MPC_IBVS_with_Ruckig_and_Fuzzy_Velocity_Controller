@@ -43,7 +43,7 @@ MPC_IBVS_with_Ruckig_and_Fuzzy_Velocity_Controller/
 │   ├── get_fov_constrains.m       # Get FOV constraints
 │   ├── linearize_model.m          # Model linearization
 │   ├── mpc_controller.m           # Main MPC controller function
-│   ├── mpc_controller_qp.m        # QP solver interface
+│   ├── mpc_controller_qp.m        # MPC controller QP 
 │   └── velocity_constraints.m     # Velocity constraints
 │
 ├── rucking_mex/                   # Ruckig Trajectory Generator
