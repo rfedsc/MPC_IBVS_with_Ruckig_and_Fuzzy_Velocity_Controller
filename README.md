@@ -150,7 +150,7 @@ test_workspace  % Workspace analysis
 - **Ruckig Library**: For trajectory generation (MEX files included)
 - **MATLAB Toolboxes**: Control System Toolbox Optimization Toolbox Fuzzy Logic Toolbox
 - **C++ Compiler**: GCC 15.1.0​ (Rev7, Built by MSYS2 project) or compatible version
-- **Robotics Toolbox**: For JR603 robot modeling and visualization 
+- **Robotics Toolbox 10.4**: For JR603 robot modeling and visualization 
 
 ## License
 
