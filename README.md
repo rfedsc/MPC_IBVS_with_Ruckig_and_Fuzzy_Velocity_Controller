@@ -1,205 +1,221 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-⭐ MPC_IBVS_with_Ruckig_and_Fuzzy_Velocity_Controller_Final
+# MPC-based IBVS with Ruckig and Fuzzy Velocity Controller
 
-A Real-Time IBVS Control Framework Integrating MPC, Ruckig, and Fuzzy Velocity Regulation
+A Model Predictive Control (MPC) based Image-Based Visual Servoing (IBVS) system integrated with Ruckig trajectory generation and fuzzy logic velocity controller for robotic motion control.
 
-📌 Overview
+## Project Overview
 
-This repository provides a complete implementation of an advanced Image-Based Visual Servoing (IBVS) control system that integrates:
+This project implements a complete visual servoing control system with the following features:
 
-Model Predictive Control (MPC) for constrained and optimal motion control
+- **MPC Controller**: For predictive control optimization
+- **IBVS Core**: Image-based visual servoing algorithms
+- **Ruckig Integration**: Smooth trajectory generation and motion planning
+- **Fuzzy Logic Control**: Intelligent velocity regulation
+- **JR603 Robot Model**: Six-degree-of-freedom industrial robot simulation
 
-Ruckig real-time trajectory generation for smooth and dynamically feasible motion
-
-Fuzzy Velocity Control for adaptive and robust speed regulation
-
-The proposed framework achieves smooth, real-time, robust, and constraint-aware camera/robot motion for embodied intelligent systems.
-
-🚀 Features
-🔹 Image-Based Visual Servoing (IBVS)
-
-Supports multi-feature visual servoing (centroid, scale, orientation, and point features)
-
-Analytical derivation of image Jacobians
-
-Nonlinear visual servoing with stable convergence
-
-🔹 Model Predictive Control (MPC)
-
-Handles field-of-view (FOV) constraints
-
-Handles velocity and actuation constraints
-
-Converts nonlinear IBVS model into LPV/QP form using online linearization
-
-🔹 Ruckig Trajectory Generator
-
-Guarantees jerk-limited, acceleration-limited, and velocity-limited motion
-
-Ensures smooth transitions without jumps
-
-Strong real-time computation performance
-
-🔹 Fuzzy Velocity Controller
-
-Mamdani fuzzy inference
-
-Enables adaptive velocity modulation (slow down near target)
-
-Improves tracking accuracy and robustness
-=======
-# 🚀 MPC-IBVS with Ruckig and Fuzzy Velocity Controller
-
-### **A Real-Time Image-Based Visual Servoing Framework with MPC, Ruckig Trajectory Generation, and Fuzzy Logic Speed Regulation**
-
-------
-
-## 📌 Overview
-
-This project implements a comprehensive **Image-Based Visual Servoing (IBVS)** system enhanced by:
-
-- **Model Predictive Control (MPC)**
-- **Real-time trajectory smoothing using Ruckig**
-- **Adaptive fuzzy velocity regulation**
-
-The framework enables **smooth, constraint-aware, and robust** robot motion for embodied intelligence applications.
-
-------
-
-## 📂 Project Structure
+## Project Structure
 
 ```
-core_ibvs/                 # IBVS core functions (error, feature extraction, Jacobians)
-mpc/                       # MPC controllers, QP matrices, linearization
-constraints/               # FOV, velocity, and adaptive gain constraints
-fuzzy_controller/          # Mamdani fuzzy logic velocity controller (V1, V2, V3)
-trajectory/                # Polynomial and S-curve trajectory generation
-robot_kinematics/          # Forward/Inverse kinematics & Jacobians
-tests/                     # Test scripts and validation tools
-main/                      # Project entry scripts
-media/                     # Simulation videos or demo media
+MPC_IBVS_with_Ruckig_and_Fuzzy_Velocity_Controller/
+│
+├── Main.m                          # Main program entry point
+├── LICENSE                         # License file
+│
+├── fuzzy_velocity_controller/      # Fuzzy Velocity Controller
+│   └── fuzzy_velocity_controller_V3.m
+│
+├── ibvs_core/                      # IBVS Core Algorithms
+│   ├── Calculate_e.m              # Error calculation
+│   ├── Calculate_Ls.m             # Interaction matrix computation
+│   ├── Calculate_s.m              # Feature calculation
+│   ├── Camera_3to2.m              # 3D to 2D camera projection
+│   ├── jacob_cross_sdh.m          # Jacobian matrix calculation
+│   ├── jr603_fkine.m              # JR603 forward kinematics
+│   ├── jr603_ivkine.m             # JR603 inverse kinematics
+│   └── jr603_sdh.m                # JR603 standard D-H parameters
+│
+├── mpc_controller/                 # MPC Controller Module
+│   ├── build_L_library.m          # Build L matrix library
+│   ├── combine_constraints.m      # Constraint combination
+│   ├── compute_weights.m          # Weight computation
+│   ├── cost_function.m            # Cost function
+│   ├── cost_function_LPV.m        # LPV cost function
+│   ├── fov_constrains.m           # Field of view constraints
+│   ├── get_fov_constrains.m       # Get FOV constraints
+│   ├── linearize_model.m          # Model linearization
+│   ├── mpc_controller.m           # Main MPC controller function
+│   ├── mpc_controller_qp.m        # QP solver interface
+│   └── velocity_constraints.m     # Velocity constraints
+│
+├── rucking_mex/                   # Ruckig Trajectory Generator
+│   ├── libruckig.dll              # Ruckig dynamic link library
+│   ├── libruckig_mex.dll.a        # MEX link library
+│   └── ruckig_mex.mexw64          # Ruckig MEX file
+│
+└── test/                          # Test scripts
+    ├── test_tu.m
+    ├── test_tu2.m
+    ├── test_tu3.m
+    ├── test_tu4.m
+    └── test_workspace.m
 ```
 
-Each folder is modular and can be used independently or integrated together in the main IBVS control loop.
+## System Requirements
 
-------
-
-## ✨ Key Features
-
-### 🔹 1. Image-Based Visual Servoing (IBVS)
-
-- Multi-feature visual servoing
-- Centroid, orientation, scale, and point features
-- Analytical Jacobian matrix computation
-- Stable closed-loop visual control
-
-### 🔹 2. Model Predictive Control (MPC)
-
-- QP-based constrained optimization
-- LPV model online linearization
-- Visual field-of-view (FOV) constraints
-- Velocity and control input limits
-- Tunable MPC cost structure
-
-### 🔹 3. Ruckig Trajectory Generation
-
-- Jerk-limited trajectory profiles
-- Smooth velocity and acceleration curves
-- Real-time feasible motion planning
-- Avoids actuator shocks
-
-### 🔹 4. Fuzzy Velocity Controller
-
-- Mamdani fuzzy inference engine
-- Multiple versions: V1, V2, V3
-- Adaptive speed reduction near the target
-- Improved robustness under disturbances
-
-### 🔹 5. Robot Kinematics Support
-
-- PUMA robot kinematics (FK/IK)
-- JR603 robot kinematics
-- Cross-product Jacobians
-- Camera 3D-to-2D projection tools
-
-------
-
-## 🧠 System Pipeline
-
-```
-Camera Image → Feature Extraction → IBVS Error
-        → MPC Optimization (QP)
-        → Ruckig Trajectory Smoothing
-        → Fuzzy Velocity Controller
-        → Robot Motion Commands
-```
-
-This modular architecture ensures stable, real-time, and constraint-aware robot motion.
-
-------
-
-## ▶ How to Use
-
-### **Run the main IBVS + MPC + Fuzzy system**
-
-```
-main/Main.m
-```
-
-### **Test a specific module**
-
-Fuzzy controller:
-
-```
-tests/test_fuzzy_velocity_controller.m
-```
-
-MPC QP constraints:
-
-```
-tests/test_fx.m
-```
-
-Trajectory generation:
-
-```
-trajectory/quintic_polynomial_traj.m
-```
-
-------
-
-## 📦 Requirements
-
-- MATLAB
-- Optimization Toolbox
+- MATLAB R2020b or higher
+- Control System Toolbox
+- Optimization Toolbox (for QP solving)
 - Fuzzy Logic Toolbox
-- Robotics Toolbox (optional)
+- Windows operating system (compatible with Ruckig MEX files)
 
-------
+## Installation and Running
 
-## 🎥 Demo
+1. Clone or download the project to your local machine
 
-A demonstration video is provided:
+2. Set the current folder in MATLAB to the project root directory
+
+3. 
+
+   Run the main program:
+
+   ```
+   Main
+   ```
+
+## Main Functional Modules
+
+### 1. IBVS Core Module (`ibvs_core/`)
+
+- Image feature extraction and error calculation
+- Interaction matrix computation
+- Camera projection model
+- JR603 robot kinematics
+
+### 2. MPC Controller (`mpc_controller/`)
+
+- Model predictive controller design
+- Constraint handling (FOV, velocity, etc.)
+- Optimization problem solving
+- Linear Parameter Varying (LPV) model support
+
+### 3. Fuzzy Velocity Controller (`fuzzy_velocity_controller/`)
+
+- Fuzzy logic-based velocity regulation
+- Adaptive control strategy
+- Smooth velocity planning
+
+### 4. Ruckig Integration (`rucking_mex/`)
+
+- Real-time trajectory generation
+- Smooth motion planning
+- Dynamic constraint handling
+
+## Usage Examples
+
+### Basic IBVS Control
 
 ```
-media/robot_motion.avi
+% Call IBVS core functions in main program
+error = Calculate_e(current_features, desired_features);
+Ls = Calculate_Ls(camera_params, features);
 ```
 
+### MPC Controller Configuration
+
+```
+% Set MPC parameters
+mpc_params = struct('N', 10, 'Q', eye(4), 'R', 0.1*eye(6));
+control_input = mpc_controller(current_state, reference, mpc_params);
+```
+
+### Fuzzy Velocity Control
+
+```
+% Use fuzzy controller for velocity adjustment
+adjusted_velocity = fuzzy_velocity_controller_V3(error, error_rate);
+```
+
+## Testing and Validation
+
+The project includes multiple test scripts:
+
+- `test_tu.m`~ `test_tu4.m`: Unit tests for different scenarios
+- `test_workspace.m`: Workspace validation test
+
+Run test scripts to verify system functionality:
+
+```bash
+test_tu1    % Basic functionality test
+test_workspace  % Workspace analysis
+```
+
+## Dependencies
+
+- **Ruckig Library**: For trajectory generation (MEX files included)
+- **MATLAB Toolboxes**: Control System Toolbox Optimization Toolbox Fuzzy Logic Toolbox
+
+## License
+
+This project is open source under the MIT License. See LICENSE file for details.
+
+## Contributing
+
+Issues and Pull Requests are welcome to improve this project.
+
+## Contact
+
+For questions or suggestions, please contact via the project Issues page.
+
 ------
 
-## 🤝 Contributing
+## Development Notes
 
-Contributions and improvements are welcome!
- Feel free to open an issue or submit a pull request.
+### File Naming Convention
 
-------
+- Function files use lowercase letters and underscores
+- Main files use capitalized first letters
+- Test files start with `test_`prefix
 
-## 📜 License
+### Code Structure
 
-MIT License
->>>>>>> e90e3d0 (update README)
-=======
-# MPC_IBVS_with_Ruckig_and_Fuzzy_Velocity_Controller
-An implementation of Image-Based Visual Servo (IBVS) integrated with Model Predictive Control (MPC), Ruckig trajectory generator, and fuzzy logic-based velocity controller for robot motion control.
->>>>>>> 5253eda9fba834231bacfac022203659a7b03dc1
+- Modular design for easy maintenance and extension
+- Clear function interfaces and documentation
+- Comprehensive test cases included
+
+### Extension Suggestions
+
+- Add support for more robot models
+- Extend visual feature types
+- Optimize real-time performance
+- Add visualization tools
+
+```bash
+Now let me help you commit to the remote repository:
+```
+
+bash
+
+# Add all files to staging area
+
+git add .
+
+# Commit changes
+
+git commit -m "Add comprehensive README.md documentation with project structure, usage guide, and system documentation"
+
+# Push to remote repository
+
+git push origin main
+
+```bash
+If you need to modify the remote repository name (e.g., from main to master), please adjust the last command accordingly.
+
+This README.md provides:
+1. Clear project overview
+2. Complete directory structure explanation
+3. Installation and running guide
+4. Detailed functional module descriptions
+5. Usage examples and testing instructions
+6. Dependency and license information
+
+This documentation will help other developers quickly understand and use your project.
+```
