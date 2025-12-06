@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ⭐ MPC_IBVS_with_Ruckig_and_Fuzzy_Velocity_Controller_Final
 
 A Real-Time IBVS Control Framework Integrating MPC, Ruckig, and Fuzzy Velocity Regulation
@@ -198,3 +199,7 @@ Contributions and improvements are welcome!
 
 MIT License
 >>>>>>> e90e3d0 (update README)
+=======
+# MPC_IBVS_with_Ruckig_and_Fuzzy_Velocity_Controller
+An implementation of Image-Based Visual Servo (IBVS) integrated with Model Predictive Control (MPC), Ruckig trajectory generator, and fuzzy logic-based velocity controller for robot motion control.
+>>>>>>> 5253eda9fba834231bacfac022203659a7b03dc1
