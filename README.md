@@ -73,9 +73,7 @@ MPC_IBVS_with_Ruckig_and_Fuzzy_Velocity_Controller/
 
 2. Set the current folder in MATLAB to the project root directory
 
-3. 
-
-   Run the main program:
+3.  Run the main program:
 
    ```
    Main
@@ -122,9 +120,8 @@ Ls = Calculate_Ls(camera_params, features);
 ### MPC Controller Configuration
 
 ```
-% Set MPC parameters
-mpc_params = struct('N', 10, 'Q', eye(4), 'R', 0.1*eye(6));
-control_input = mpc_controller(current_state, reference, mpc_params);
+mpc_controller_qp(s,s_target,z_star,Np,Q,R_weight,W_weight,Ts,K,F,image_width,image_height,tau_now,A,B,v_max,w_max);
+mpc_controller(s,s_target,z_star,Np,Q,R_weight,W_weight,Ts,K,F,q_current,image_width,image_height,tau_now,fig_handle,vis_predict,A,B);
 ```
 
 ### Fuzzy Velocity Control
